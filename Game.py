@@ -20,6 +20,7 @@ class Game():
         else:
           pygame.draw.rect(self.surface, "white", pygame.Rect((r * (self.Size_x / self.NumOfRowsX)), (i * (self.Size_y / self.NumOfRowsY)),((i + 1) * (self.Size_x / self.NumOfRowsX)), (i  +1 * (self.Size_y / self.NumOfRowsY))))
       pygame.display.update()
+      print("1")
     
     self.Cells: list[list[Cell]] = []
     for i in range(0, self.NumOfRowsY):
