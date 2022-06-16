@@ -3,38 +3,83 @@ import numpy as np
 
 class Game():
 
-  def __init__(self, Size_x :int, Size_y: int, NumOfRowsX, NumOfRowsY: int):
+  def __init__(self, Size_x :int, Size_y: int, NumOfRows: int):
     self.Size_x = Size_x
     self.Size_y = Size_y
-    self.NumOfRowsX = NumOfRowsX
-    self.NumOfRowsY = NumOfRowsY
+    self.NumOfRows = NumOfRows
     self.running = True
     self.surface = pygame.display.set_mode((self.Size_x, self.Size_y))
     self.color = ("black")
     self.surface.fill("white")
     
-    for r in range(0, self.NumOfRowsX):
+    for r in range(0, self.NumOfRows):
       if r % 2 == 0:
-        for i in range(0, self.NumOfRowsY):
+        for i in range(0, self.NumOfRows):
           if i % 2 == 0 or i == 0:
-            pygame.draw.rect(self.surface, (162, 216, 99) , pygame.Rect((i * (self.Size_x / self.NumOfRowsX)), (r * (self.Size_y / self.NumOfRowsY)),((i + 1) * (self.Size_x / self.NumOfRowsX)), (i  +1 * (self.Size_y / self.NumOfRowsY))))
+            pygame.draw.rect(self.surface, "white" , pygame.Rect((i * (self.Size_x / self.NumOfRows)), (r * (self.Size_y / self.NumOfRows)),((i + 1) * (self.Size_x / self.NumOfRows)), (i  +1 * (self.Size_y / self.NumOfRows))))
           else:
-            pygame.draw.rect(self.surface, "white", pygame.Rect((i * (self.Size_x / self.NumOfRowsX)), (r * (self.Size_y / self.NumOfRowsY)),((i + 1) * (self.Size_x / self.NumOfRowsX)), (i  +1 * (self.Size_y / self.NumOfRowsY))))
+            pygame.draw.rect(self.surface, (162, 216, 99), pygame.Rect((i * (self.Size_x / self.NumOfRows)), (r * (self.Size_y / self.NumOfRows)),((i + 1) * (self.Size_x / self.NumOfRows)), (i  +1 * (self.Size_y / self.NumOfRows))))
       else:
-        for i in range(0, self.NumOfRowsY):
+        for i in range(0, self.NumOfRows):
           if i % 2 == 0 or i == 0:
-            pygame.draw.rect(self.surface, "white", pygame.Rect((i * (self.Size_x / self.NumOfRowsX)), (r * (self.Size_y / self.NumOfRowsY)),((i + 1) * (self.Size_x / self.NumOfRowsX)), (i  +1 * (self.Size_y / self.NumOfRowsY))))
+            pygame.draw.rect(self.surface, (162, 216, 99), pygame.Rect((i * (self.Size_x / self.NumOfRows)), (r * (self.Size_y / self.NumOfRows)),((i + 1) * (self.Size_x / self.NumOfRows)), (i  +1 * (self.Size_y / self.NumOfRows))))
           else:
-            pygame.draw.rect(self.surface, (162, 216, 99) , pygame.Rect((i * (self.Size_x / self.NumOfRowsX)), (r * (self.Size_y / self.NumOfRowsY)),((i + 1) * (self.Size_x / self.NumOfRowsX)), (i  +1 * (self.Size_y / self.NumOfRowsY))))
-        pygame.display.update()
+            pygame.draw.rect(self.surface, "white" , pygame.Rect((i * (self.Size_x / self.NumOfRows)), (r * (self.Size_y / self.NumOfRows)),((i + 1) * (self.Size_x / self.NumOfRows)), (i  +1 * (self.Size_y / self.NumOfRows))))
+    
+    WhitePawn = pygame.image.load("C:\\vscodeprojects\\python\\Chess\\Chess-1\\images\\White Pawn.png")
+    WhiteKnight = pygame.image.load("C:\\vscodeprojects\\python\\Chess\\Chess-1\\images\\White Knight.png")
+    WhiteRook = pygame.image.load("C:\\vscodeprojects\\python\\Chess\\Chess-1\\images\\White Rook.png")
+    WhiteBishop = pygame.image.load("C:\\vscodeprojects\\python\\Chess\\Chess-1\\images\\White Bishop.png")
+    WhiteKing = pygame.image.load("C:\\vscodeprojects\\python\\Chess\\Chess-1\\images\\White King.png")
+    WhiteQueen = pygame.image.load("C:\\vscodeprojects\\python\\Chess\\Chess-1\\images\\White Queen.png")
+    BlackPawn = pygame.image.load("C:\\vscodeprojects\\python\\Chess\\Chess-1\\images\\Black Pawn.png")
+    BlackKnight = pygame.image.load("C:\\vscodeprojects\\python\\Chess\\Chess-1\\images\\Black Knight.png")
+    BlackRook = pygame.image.load("C:\\vscodeprojects\\python\\Chess\\Chess-1\\images\\Black Rook.png")
+    BlackBishop = pygame.image.load("C:\\vscodeprojects\\python\\Chess\\Chess-1\\images\\Black Bishop.png")
+    BlackKing = pygame.image.load("C:\\vscodeprojects\\python\\Chess\\Chess-1\\images\\Black King.png")
+    BlackQueen = pygame.image.load("C:\\vscodeprojects\\python\\Chess\\Chess-1\\images\\Black Queen.png")
     
     self.Cells: list[list[Cell]] = []
-    for i in range(0, self.NumOfRowsX):
+    for i in range(0, self.NumOfRows):
       row: list[Cell] = []
-      for n in range(0, self.NumOfRowsY):
+      for n in range(0, self.NumOfRows):
         cell = Cell(n, i)
+        match i:
+          case 0:
+            match n:
+              case 0 | 7:
+                self.surface.blit(BlackRook, (((n * self.Size_x / self.NumOfRows) + 15), (i * (self.Size_y) / self.NumOfRows)))
+              case 1 | 6:
+                self.surface.blit(BlackKnight, (((n * self.Size_x / self.NumOfRows) + 20), (i * (self.Size_y) / self.NumOfRows) - 5))
+              case 2 | 5:
+                self.surface.blit(BlackBishop, (((n * self.Size_x / self.NumOfRows) + 5), (i * (self.Size_y) / self.NumOfRows) + 5))
+              case 3:
+                self.surface.blit(BlackQueen, (((n * self.Size_x / self.NumOfRows) + 10), (i * (self.Size_y) / self.NumOfRows)))
+              case 4:
+                self.surface.blit(BlackKing, (((n * self.Size_x / self.NumOfRows) + 10), (i * (self.Size_y) / self.NumOfRows)))
+          case 1:
+            self.surface.blit(BlackPawn, (((n * self.Size_x / self.NumOfRows) + 15), (i * (self.Size_y) / self.NumOfRows)))
+          case 6:
+            self.surface.blit(WhitePawn, (((n * self.Size_x / self.NumOfRows) + 15), (i * (self.Size_y) / self.NumOfRows)))
+          case 7:
+            match n:
+              case 0 | 7:
+                self.surface.blit(WhiteRook, (((n * self.Size_x / self.NumOfRows) + 10), (i * (self.Size_y) / self.NumOfRows) - 5))
+              case 1 | 6:
+                self.surface.blit(WhiteKnight, (((n * self.Size_x / self.NumOfRows) + 10), (i * (self.Size_y) / self.NumOfRows) + 3))
+              case 2 | 5:
+                self.surface.blit(WhiteBishop, (((n * self.Size_x / self.NumOfRows) + 15), (i * (self.Size_y) / self.NumOfRows) + 5))
+              case 3:
+                self.surface.blit(WhiteQueen, (((n * self.Size_x / self.NumOfRows) + 5), (i * (self.Size_y) / self.NumOfRows)))
+              case 4:
+                self.surface.blit(WhiteKing, (((n * self.Size_x / self.NumOfRows) + 5), (i * (self.Size_y) / self.NumOfRows)))
+
+
         row.append(cell)
-      self.Cells.append(row)
+    self.Cells.append(row)
+      
+    pygame.display.update()
+
       
   def start(self):
       while self.running:        
@@ -53,5 +98,6 @@ class Cell():
     self.position_x = position_x
     self.position_y = position_y
     self.type = "empty"
-CHESS = Game(800, 700, 8, 8)
+    
+CHESS = Game(800, 700, 8)
 CHESS.start()
