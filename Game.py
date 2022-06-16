@@ -14,13 +14,21 @@ class Game():
     self.surface.fill("white")
     
     for r in range(0, self.NumOfRowsX):
-      for i in range(0, self.NumOfRowsY):
-        if i % 2 == 0 or i == 0:
-          pygame.draw.rect(self.surface, "black", pygame.Rect((r * (self.Size_x / self.NumOfRowsX)), (i * (self.Size_y / self.NumOfRowsY)),((i + 1) * (self.Size_x / self.NumOfRowsX)), (i  +1 * (self.Size_y / self.NumOfRowsY))))
-        else:
-          pygame.draw.rect(self.surface, "white", pygame.Rect((r * (self.Size_x / self.NumOfRowsX)), (i * (self.Size_y / self.NumOfRowsY)),((i + 1) * (self.Size_x / self.NumOfRowsX)), (i  +1 * (self.Size_y / self.NumOfRowsY))))
-      pygame.display.update()
-      print("1")
+      if r % 2 == 0:
+        for i in range(0, self.NumOfRowsY):
+          if i % 2 == 0 or i == 0:
+            pygame.draw.rect(self.surface, "black", pygame.Rect((r * (self.Size_x / self.NumOfRowsX)), (i * (self.Size_y / self.NumOfRowsY)),((i + 1) * (self.Size_x / self.NumOfRowsX)), (i  +1 * (self.Size_y / self.NumOfRowsY))))
+          else:
+            pygame.draw.rect(self.surface, "white", pygame.Rect((r * (self.Size_x / self.NumOfRowsX)), (i * (self.Size_y / self.NumOfRowsY)),((i + 1) * (self.Size_x / self.NumOfRowsX)), (i  +1 * (self.Size_y / self.NumOfRowsY))))
+      else:
+        for i in range(0, self.NumOfRowsY):
+          if i % 2 == 0 or i == 0:
+            pygame.draw.rect(self.surface, "white", pygame.Rect((r * (self.Size_x / self.NumOfRowsX)), (i * (self.Size_y / self.NumOfRowsY)),((i + 1) * (self.Size_x / self.NumOfRowsX)), (i  +1 * (self.Size_y / self.NumOfRowsY))))
+          else:
+            pygame.draw.rect(self.surface, "black", pygame.Rect((r * (self.Size_x / self.NumOfRowsX)), (i * (self.Size_y / self.NumOfRowsY)),((i + 1) * (self.Size_x / self.NumOfRowsX)), (i  +1 * (self.Size_y / self.NumOfRowsY))))
+        pygame.display.update()
+
+        print("1")
     
     self.Cells: list[list[Cell]] = []
     for i in range(0, self.NumOfRowsY):
